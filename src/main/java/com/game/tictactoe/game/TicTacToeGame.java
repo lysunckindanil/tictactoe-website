@@ -1,5 +1,6 @@
 package com.game.tictactoe.game;
 
+import lombok.Getter;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
@@ -8,6 +9,7 @@ import java.util.Objects;
 public class TicTacToeGame {
     private boolean first_turn = true;
     private final Integer[] cells = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    @Getter
     private Integer won;
 
     public boolean first(int cell) {
@@ -59,7 +61,4 @@ public class TicTacToeGame {
         }
     }
 
-    public Integer getWon() {
-        return won;
-    }
 }
