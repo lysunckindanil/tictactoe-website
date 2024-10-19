@@ -21,9 +21,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-//                .authorizeHttpRequests(authorize -> authorize.requestMatchers("/users", "/users/logout").hasRole("USER"))
                 .authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll())
-                .formLogin(form -> form.loginPage("/users/login").loginProcessingUrl("/users/login").defaultSuccessUrl("/game").permitAll())
+                .formLogin(form -> form.loginPage("/users/login").loginProcessingUrl("/users/login").defaultSuccessUrl("/").permitAll())
                 .logout(form -> form.logoutUrl("/users/logout").logoutSuccessUrl("/users/login"))
                 .httpBasic(Customizer.withDefaults());
 

@@ -5,13 +5,16 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}"/>
     <title>Game</title>
     <link href="/css/cells.css" rel="stylesheet">
+    <script src="/js/game.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
 <article class="outer">
     <section class="game-inner">
-        <div th:each="cell : ${cells}" class="cell" th:id="${cell}" th:text="${cell}">
+        <div th:each="cell : ${cells}" class="cell" th:id="${cell}" th:text="${cell}" onclick="makeMove(this.id)">
         </div>
 
     </section>
@@ -43,6 +46,14 @@
 
         <div th:if="${principal!=null}">
             <div th:text="${principal.getName()}"></div>
+            <div id="session_info">
+                <button onclick="create_session()">Create session</button>
+                <hr>
+                <label> Target id:
+                    <input id="target_connect_input">
+                </label>
+                <button onclick="connect_session()">Connect session</button>
+            </div>
         </div>
 
     </section>

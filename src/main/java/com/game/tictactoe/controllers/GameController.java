@@ -1,22 +1,68 @@
 package com.game.tictactoe.controllers;
 
-import com.game.tictactoe.entities.User;
+import com.game.tictactoe.game.http.GameCounterHttpEntity;
+import com.game.tictactoe.game.http.GameStateHttpEntity;
+import com.game.tictactoe.services.GameService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
-@Controller
+@Slf4j
+@RequiredArgsConstructor
 @RequestMapping("/game")
+@Controller
 public class GameController {
+    private final GameService gameService;
 
-    @GetMapping
-    public String index(Model model, Principal principal) {
-        model.addAttribute("principal", principal);
-        model.addAttribute("user", new User());
-        model.addAttribute("cells", new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9});
-        return "game/index";
+    @PostMapping("/move")
+    @ResponseBody
+    public void makeMove(@RequestParam Integer cell, Principal principal) {
+        gameService.makeMove(principal.getName(), cell);
+    }
+
+    @GetMapping("/state")
+    @ResponseBody
+    public GameStateHttpEntity getState(@RequestParam Integer target) {
+        return gameService.getGameState(target);
+    }
+
+
+    @GetMapping("/counter")
+    @ResponseBody
+    public Integer getCounter(Principal principal) {
+        return gameService.getGameCounter(principal.getName());
+    }
+
+    @PostMapping("/create")
+    @ResponseBody
+    public Integer createSession(Principal principal) {
+        return gameService.createSession(principal.getName());
+    }
+
+
+    @PostMapping("/connect")
+    @ResponseBody
+    public Integer connectSession(@RequestParam Integer target, Principal principal) {
+        gameService.connect(target, principal.getName());
+        return target;
+    }
+
+    @GetMapping("/session")
+    @ResponseBody
+    public Integer getSession(Principal principal) {
+        if (principal == null) return 0;
+        Integer target = gameService.getTargetByUsername(principal.getName());
+        if (target == null) return 0;
+        return target;
+    }
+
+    @PostMapping("/close")
+    @ResponseBody
+    public void closeSession(Principal principal) {
+        gameService.close(gameService.getTargetByUsername(principal.getName()));
     }
 }
