@@ -1,26 +1,31 @@
 .cell {
-    width: 100px;
-    height: 100px;
-    display: inline-block;
-    text-align: center;
+    /*width: 30px;*/
+    /*height: 30px;*/
+    /*display: inline-block;*/
+    /*text-align: center;*/
     border: solid black 1px;
-    margin: 5px;
+    border-radius: 5%;
+    box-sizing: border-box;
+    /*margin: 2px;*/
 }
 
-.game-inner {
-    display: inline-block;
-    width: 350px;
-    border: black solid 1px;
-    margin: 10px;
+#game-inner {
+    display: grid;
+    margin: 30px;
 }
 
-.info-inner {
-    width: 200px;
-    display: inline-block;
+#outer {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
 }
 
-.outer {
-    width: 600px;
-    border: black solid 3px;
-    margin-left: 50px;
+.error {
+    color: red;
+}
+
+.player-cell-img {
+    width: inherit;
+    height: inherit;
 }

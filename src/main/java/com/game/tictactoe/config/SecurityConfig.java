@@ -22,7 +22,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll())
-                .formLogin(form -> form.loginPage("/users/login").loginProcessingUrl("/users/login").defaultSuccessUrl("/").permitAll())
+                .formLogin(form -> form.loginPage("/users/login").loginProcessingUrl("/users/login").
+                        failureUrl("/users/login?error=true").defaultSuccessUrl("/").permitAll())
                 .logout(form -> form.logoutUrl("/users/logout").logoutSuccessUrl("/users/login"))
                 .httpBasic(Customizer.withDefaults());
 
@@ -30,11 +31,11 @@ public class SecurityConfig {
         return http.build();
     }
 
-    @Bean
-    public DaoAuthenticationProvider daoAuthenticationProvider() {
-        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
-        daoAuthenticationProvider.setUserDetailsService(userService);
-        return daoAuthenticationProvider;
-    }
+//    @Bean
+//    public DaoAuthenticationProvider daoAuthenticationProvider() {
+//        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+//        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
+//        daoAuthenticationProvider.setUserDetailsService(userService);
+//        return daoAuthenticationProvider;
+//    }
 }

@@ -1,12 +1,12 @@
-package com.game.tictactoe.game.http;
+package com.game.tictactoe.game.util;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
+@Data
 @AllArgsConstructor
 @JacksonXmlRootElement
-public class GameCounterHttpEntity {
-    int counter;
+public class GameExceptionResponse {
+    String message;
 }
