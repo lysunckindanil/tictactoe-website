@@ -1,6 +1,5 @@
 package com.game.tictactoe.controllers;
 
-import com.game.tictactoe.services.GameService;
 import com.game.tictactoe.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
