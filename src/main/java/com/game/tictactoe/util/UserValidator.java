@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+@SuppressWarnings("NullableProblems")
 @Component
 @RequiredArgsConstructor
 public class UserValidator implements Validator {

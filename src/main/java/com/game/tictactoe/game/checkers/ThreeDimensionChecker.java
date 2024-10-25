@@ -22,9 +22,6 @@ public class ThreeDimensionChecker implements TicTacToeGameWinnerChecker {
         if (Objects.equals(positions[0], player) && Objects.equals(positions[0], positions[4]) && Objects.equals(positions[4], positions[8])) {
             return true;
         }
-        if (Objects.equals(positions[2], player) && Objects.equals(positions[2], positions[4]) && Objects.equals(positions[4], positions[6])) {
-            return true;
-        }
-        return false;
+        return Objects.equals(positions[2], player) && Objects.equals(positions[2], positions[4]) && Objects.equals(positions[4], positions[6]);
     }
 }

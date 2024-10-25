@@ -134,7 +134,6 @@ function renderPositions(positions) {
     for (let i = 0; i < positions.length; i++) {
         if (positions[i] !== 0) {
             const cell = document.getElementById(String(i + 1));
-            const cell_width = cell.style.width;
             if (positions[i] === 1)
                 cell.style.backgroundImage = 'url(/img/player1.jpg)';
 

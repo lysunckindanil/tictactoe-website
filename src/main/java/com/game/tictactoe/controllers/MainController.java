@@ -13,7 +13,6 @@ import java.security.Principal;
 @RequiredArgsConstructor
 public class MainController {
     private final UserService userService;
-    private final GameService gameService;
 
     @GetMapping
     public String index(Model model, Principal principal) {
