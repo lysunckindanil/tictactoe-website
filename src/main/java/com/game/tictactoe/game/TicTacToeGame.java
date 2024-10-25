@@ -1,7 +1,6 @@
 package com.game.tictactoe.game;
 
 import com.game.tictactoe.game.util.GameException;
-import lombok.Data;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
@@ -53,7 +52,6 @@ public class TicTacToeGame {
         }
 
     }
-
 
     public boolean isOver() {
         return winner != null;

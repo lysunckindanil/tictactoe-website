@@ -1,18 +1,16 @@
 package com.game.tictactoe.services;
 
-import com.game.tictactoe.game.modes.GameModes;
-import com.game.tictactoe.game.util.GameException;
 import com.game.tictactoe.game.GameSession;
 import com.game.tictactoe.game.TicTacToeGame;
-import com.game.tictactoe.game.TicTacToeGameWinnerChecker;
 import com.game.tictactoe.game.http.GameStateHttpEntity;
+import com.game.tictactoe.game.modes.GameModes;
+import com.game.tictactoe.game.util.GameException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Random;
 
 @Slf4j
 @Service

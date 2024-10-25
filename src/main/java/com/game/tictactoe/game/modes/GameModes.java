@@ -1,7 +1,6 @@
 package com.game.tictactoe.game.modes;
 
 import com.game.tictactoe.game.TicTacToeGame;
-import com.game.tictactoe.game.TicTacToeGameWinnerChecker;
 import com.game.tictactoe.game.checkers.TenDimensionChecker;
 import com.game.tictactoe.game.checkers.ThreeDimensionChecker;
 
