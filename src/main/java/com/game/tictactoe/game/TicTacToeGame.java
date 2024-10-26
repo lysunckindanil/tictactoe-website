@@ -12,21 +12,21 @@ public class TicTacToeGame {
     private final TicTacToeGameWinnerChecker ticTacToeGameWinnerChecker;
 
     @Getter
-    private final Integer[] cells;
+    private final int[] cells;
     @Getter
-    private Integer winner;
+    private int winner;
     @Getter
     private final int dimension;
 
     public TicTacToeGame(int dimension, TicTacToeGameWinnerChecker ticTacToeGameWinnerChecker) {
         this.ticTacToeGameWinnerChecker = ticTacToeGameWinnerChecker;
         this.dimension = dimension;
-        cells = new Integer[dimension * dimension];
+        cells = new int[dimension * dimension];
         Arrays.fill(cells, 0);
     }
 
     public void first(int cell) throws GameException {
-        if (first_turn && winner == null) {
+        if (first_turn && winner == 0) {
             if (cell > cells.length || cell < 1 || cells[cell - 1] != 0) {
                 throw new GameException("You can't play here");
             }
@@ -40,7 +40,7 @@ public class TicTacToeGame {
 
 
     public void second(int cell) throws GameException {
-        if (!first_turn && winner == null) {
+        if (!first_turn && winner == 0) {
             if (cell > cells.length || cell < 1 || cells[cell - 1] != 0) {
                 throw new GameException("You can't play here");
             }
@@ -54,7 +54,7 @@ public class TicTacToeGame {
     }
 
     public boolean isOver() {
-        return winner != null;
+        return winner != 0;
     }
 
 }

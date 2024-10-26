@@ -7,6 +7,8 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @JacksonXmlRootElement
-public class GameDimensionHttpEntity {
-    Integer dimension;
+public class StateHttpEntity {
+    int[] positions;
+    boolean isOver;
+    String winner;
 }

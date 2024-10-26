@@ -7,6 +7,7 @@ function createSession() {
         url: '/game/create',
         headers: {"X-CSRF-TOKEN": token},
         method: 'POST',
+        dataType: 'json',
         data: {'dimension': dimension},
         success: function (data) {
             renderSessionPage(data['target']);
@@ -22,6 +23,7 @@ function connectSession() {
         url: '/game/connect',
         headers: {"X-CSRF-TOKEN": token},
         method: 'POST',
+        dataType: 'json',
         data: {'target': Number(input)},
         success: function (data) {
             renderSessionPage(data['target'])
@@ -33,7 +35,7 @@ function connectSession() {
     });
 }
 
-function endSession() {
+function closeSession() {
     const token = $("meta[name='_csrf']").attr("content");
     $.ajax({
         url: '/game/close',
@@ -48,7 +50,7 @@ function endSession() {
 function renderSessionPage(target) {
     const sessionInfoSection = document.getElementById("session-info");
     sessionInfoSection.innerHTML = `<p>Target: ${target}</p>
-                         <button class="btn btn-secondary" onclick="endSession()">End session</button>`
+                         <button class="btn btn-secondary" onclick="closeSession()">End session</button>`
     renderCellsGrid(getDimensionHttpEntity(target));
 }
 
@@ -64,8 +66,7 @@ function renderCellsGrid(dimension) {
     gameGrid.style.gap = '4px';
     gameGrid.style.width = '500px';
     gameGrid.style.height = '500px';
-    gameGrid.style.setProperty('grid-template-columns',
-        'repeat(' + dimension + ', 1fr)');
+    gameGrid.style.setProperty('grid-template-columns', 'repeat(' + dimension + ', 1fr)');
 
 }
 
@@ -80,12 +81,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // game process
 
+
 function makeMove(cell) {
     const token = $("meta[name='_csrf']").attr("content");
     $.ajax({
         url: '/game/move',
         headers: {"X-CSRF-TOKEN": token},
         method: 'POST',
+        dataType: 'json',
         data: {'cell': Number(cell)},
         success: function () {
             handleGameState()
@@ -100,13 +103,13 @@ function handleGameState() {
     const target = getTargetHttpEntity();
     const state = getStateHttpEntity(target)
     const positions = state['positions'];
-    renderPositions(positions);
+    renderPositions(positions, getPlayersHttp(target));
 }
 
 function startReloadPositionsLoop(duration) {
+    const target = getTargetHttpEntity();
     let counter = 0;
     let state = null
-    const target = getTargetHttpEntity();
 
     const thread = setInterval(() => {
         const checkState = () => {
@@ -130,15 +133,14 @@ function startReloadPositionsLoop(duration) {
 }
 
 
-function renderPositions(positions) {
+function renderPositions(positions, players) {
     for (let i = 0; i < positions.length; i++) {
         if (positions[i] !== 0) {
             const cell = document.getElementById(String(i + 1));
-            if (positions[i] === 1)
-                cell.style.backgroundImage = 'url(/img/player1.jpg)';
+            if (positions[i] === 1) cell.style.backgroundImage = `url(/profile_photos/${players[0]}.png)`;
 
             else {
-                cell.style.backgroundImage = 'url(/img/player2.jpg)';
+                cell.style.backgroundImage = `url(/profile_photos/${players[1]}.png)`;
             }
             cell.style.backgroundSize = 'cover';
         }
@@ -146,7 +148,12 @@ function renderPositions(positions) {
 }
 
 function gameOverShow(winner) {
-    alert('winner is ' + winner)
+    const modal = new bootstrap.Modal(document.getElementById('error-modal'), {keyboard: false});
+    const modalTitle = document.getElementById("modal-title");
+    const modalBody = document.getElementById("modal-body")
+    modalTitle.textContent = 'The game is over';
+    modalBody.textContent = 'The winner is ' + winner + '!'
+    modal.show();
 }
 
 function showErrorModal(error) {
@@ -155,8 +162,8 @@ function showErrorModal(error) {
     const modal = new bootstrap.Modal(document.getElementById('error-modal'), {keyboard: false});
     const modalTitle = document.getElementById("modal-title");
     const modalBody = document.getElementById("modal-body")
-    modalTitle.textContent = 'Ошибка';
-    modalBody.textContent = message
+    modalTitle.textContent = 'Error';
+    modalBody.textContent = message;
     modal.show();
 }
 
@@ -168,7 +175,7 @@ function getStateHttpEntity(target) {
         method: 'GET',
         async: false,
         dataType: 'json',
-        data: {'target': Number(target)},
+        data: {'target': target},
         success: function (data) {
             state = data;
         }
@@ -179,10 +186,7 @@ function getStateHttpEntity(target) {
 function getTargetHttpEntity() {
     let target = null;
     $.ajax({
-        url: '/game/session',
-        method: 'GET',
-        async: false,
-        success: function (data) {
+        url: '/game/session', method: 'GET', dataType: 'json', async: false, success: function (data) {
             target = data['target'];
         }
     });
@@ -194,6 +198,7 @@ function getCounterHttpEntity(target) {
     $.ajax({
         url: '/game/counter',
         method: 'GET',
+        dataType: 'json',
         async: false,
         data: {'target': target},
         success: function (data) {
@@ -209,10 +214,27 @@ function getDimensionHttpEntity(target) {
         url: '/game/dimension',
         method: 'GET',
         async: false,
+        dataType: 'json',
         data: {'target': target},
         success: function (data) {
             dimension = data['dimension'];
         }
     });
     return dimension;
+}
+
+function getPlayersHttp(target) {
+    let players = [];
+    $.ajax({
+        url: '/game/players',
+        method: 'GET',
+        async: false,
+        dataType: 'json',
+        data: {'target': target},
+        success: function (data) {
+            players[0] = data['player1'];
+            players[1] = data['player2'];
+        }
+    });
+    return players;
 }

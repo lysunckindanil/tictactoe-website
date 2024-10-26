@@ -8,20 +8,20 @@ import java.util.Objects;
 @Component
 public class ThreeDimensionChecker implements TicTacToeGameWinnerChecker {
     @Override
-    public boolean checkWinner(Integer[] positions, Integer player) {
+    public boolean checkWinner(int[] positions, int player) {
         for (int i = 0; i < 9; i += 3) {
-            if (Objects.equals(positions[i], player) && Objects.equals(positions[i], positions[i + 1]) && Objects.equals(positions[i + 1], positions[i + 2])) {
+            if (positions[i] == player && positions[i] == positions[i + 1] && positions[i + 1] == positions[i + 2]) {
                 return true;
             }
         }
         for (int i = 0; i <= 2; i++) {
-            if (Objects.equals(positions[i], player) && Objects.equals(positions[i], positions[i + 3]) && Objects.equals(positions[i + 3], positions[i + 6])) {
+            if (positions[i] == player && positions[i] == positions[i + 3] && positions[i + 3] == positions[i + 6]) {
                 return true;
             }
         }
-        if (Objects.equals(positions[0], player) && Objects.equals(positions[0], positions[4]) && Objects.equals(positions[4], positions[8])) {
+        if (positions[0] == player && positions[0] == positions[4] && positions[4] == positions[8]) {
             return true;
         }
-        return Objects.equals(positions[2], player) && Objects.equals(positions[2], positions[4]) && Objects.equals(positions[4], positions[6]);
+        return positions[2] == player && positions[2] == positions[4] && positions[4] == positions[6];
     }
 }

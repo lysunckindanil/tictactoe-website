@@ -1,6 +1,6 @@
 package com.game.tictactoe.game;
 
-import com.game.tictactoe.game.http.GameStateHttpEntity;
+import com.game.tictactoe.game.http.StateHttpEntity;
 import com.game.tictactoe.game.util.GameException;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -36,13 +36,13 @@ public class GameSession {
         }
     }
 
-    public GameStateHttpEntity getGameState() {
+    public StateHttpEntity getGameState() {
         String winner = null;
-        if (game.getWinner() != null) {
+        if (game.getWinner() != 0) {
             if (game.getWinner() == 1) winner = player1;
             if (game.getWinner() == 2) winner = player2;
         }
-        return new GameStateHttpEntity(game.getCells(), game.isOver(), winner);
+        return new StateHttpEntity(game.getCells(), game.isOver(), winner);
     }
 
     public Integer getGameCounter() {

@@ -8,14 +8,13 @@
 <!-- header not signed in -->
 <header th:fragment="headerNotSigned" class="p-3 text-bg-dark shadow">
     <div
-            class="d-flex flex-wrap align-items-center justify-content-between"
+            class="d-flex flex-wrap align-items-center justify-content-end"
     >
-        <span>icon</span>
         <div class="text-end">
             <a th:href="@{/users/login}" type="button" class="btn btn-outline-light me-2">
-                Sign-in
+                Sign in
             </a>
-            <a th:href="@{/users/register}" type="button" class="btn btn-warning">Sign-up</a>
+            <a th:href="@{/users/register}" type="button" class="btn btn-warning">Sign up</a>
         </div>
     </div>
 </header>
@@ -27,8 +26,13 @@
             class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-end"
     >
         <i class="bi bi-person-circle"></i>
-        <pre> </pre>
-        <a th:text="${username}"></a>
+        <!--suppress HtmlUnknownAnchorTarget -->
+        <a style="text-decoration: none; color: gray; margin-left: 5px; padding-bottom: 4px"
+           href="#profile-sidebar"
+           data-bs-toggle="offcanvas"
+           role="button"
+           aria-controls="profile-sidebar" th:text="${username}">
+        </a>
     </div>
 </header>
 

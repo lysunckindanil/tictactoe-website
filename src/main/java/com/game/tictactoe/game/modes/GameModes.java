@@ -13,7 +13,17 @@ public class GameModes {
         return new TicTacToeGame(10, new TenDimensionChecker());
     }
 
-    public static TicTacToeGame getAntDimensionTicTacToeGame(int dimension) {
+    public static TicTacToeGame getAnyDimensionTicTacToeGame(int dimension) {
         return new TicTacToeGame(dimension, (positions, player) -> false);
+    }
+
+    public static TicTacToeGame resolve(int dimension) {
+        if (dimension == 3) {
+            return getThreeDimensionTicTacToeGame();
+        }
+        if (dimension == 10) {
+            return getTenDimensionTicTacToeGame();
+        }
+        return getAnyDimensionTicTacToeGame(dimension);
     }
 }

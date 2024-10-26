@@ -4,7 +4,7 @@ import com.game.tictactoe.game.TicTacToeGameWinnerChecker;
 
 public class TenDimensionChecker implements TicTacToeGameWinnerChecker {
     @Override
-    public boolean checkWinner(Integer[] positions, Integer player) {
+    public boolean checkWinner(int[] positions, int player) {
         return false;
     }
 }

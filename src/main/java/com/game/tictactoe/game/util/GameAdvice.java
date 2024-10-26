@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GameAdvice {
 
     @ExceptionHandler(GameException.class)
-    public ResponseEntity<GameExceptionResponse> gameException(GameException ex) {
-        GameExceptionResponse response = new GameExceptionResponse(ex.getMessage());
+    public ResponseEntity<ExceptionMessageResponse> gameException(GameException ex) {
+        ExceptionMessageResponse response = new ExceptionMessageResponse(ex.getMessage());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 }

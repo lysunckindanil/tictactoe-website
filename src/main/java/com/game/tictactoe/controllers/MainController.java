@@ -15,10 +15,7 @@ public class MainController {
 
     @GetMapping
     public String index(Model model, Principal principal) {
-        if (principal != null) {
-            model.addAttribute("user", userService.getUser(principal.getName()));
-            return "home/home_authorized";
-        }
-        return "home/home_no_authorized";
+        model.addAttribute("user", userService.getUser(principal.getName()));
+        return "home/home_authorized";
     }
 }
