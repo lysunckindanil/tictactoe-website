@@ -1,0 +1,16 @@
+p {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+p span::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+p span {
+    all: initial;
+    overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
