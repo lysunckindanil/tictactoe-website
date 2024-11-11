@@ -1,12 +1,8 @@
-package com.game.tictactoe.game.checkers;
+package com.game.tictactoe.game.modes;
 
 import com.game.tictactoe.game.TicTacToeGameWinnerChecker;
-import org.springframework.stereotype.Component;
 
-import java.util.Objects;
-
-@Component
-public class ThreeDimensionChecker implements TicTacToeGameWinnerChecker {
+class ThreeDimensionChecker implements TicTacToeGameWinnerChecker {
     @Override
     public boolean checkWinner(int[] positions, int player) {
         for (int i = 0; i < 9; i += 3) {

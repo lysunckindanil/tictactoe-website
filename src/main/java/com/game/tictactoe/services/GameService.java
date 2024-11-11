@@ -3,7 +3,7 @@ package com.game.tictactoe.services;
 import com.game.tictactoe.game.GameSession;
 import com.game.tictactoe.game.http.PlayersHttpEntity;
 import com.game.tictactoe.game.http.StateHttpEntity;
-import com.game.tictactoe.game.modes.GameModes;
+import com.game.tictactoe.game.modes.TicTacToeGames;
 import com.game.tictactoe.game.util.GameException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -27,7 +27,7 @@ public class GameService {
         Integer target = getTarget(username);
         if (game_sessions.containsKey(target))
             throw new GameException("You should close last game before creating new one");
-        game_sessions.put(target, new GameSession(username, GameModes.resolve(dimension)));
+        game_sessions.put(target, new GameSession(username, TicTacToeGames.resolve(dimension)));
         player_target.put(username, target);
         return target;
     }

@@ -1,8 +1,8 @@
-package com.game.tictactoe.game.checkers;
+package com.game.tictactoe.game.modes;
 
 import com.game.tictactoe.game.TicTacToeGameWinnerChecker;
 
-public class TenDimensionChecker implements TicTacToeGameWinnerChecker {
+class TenDimensionCheckerNoWinner implements TicTacToeGameWinnerChecker {
     @Override
     public boolean checkWinner(int[] positions, int player) {
         return false;
