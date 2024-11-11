@@ -1,6 +1,6 @@
 package com.game.tictactoe.controllers;
 
-import com.game.tictactoe.game.util.GameException;
+import com.game.tictactoe.game.util.exceptions.GameException;
 import com.game.tictactoe.game.util.http.*;
 import com.game.tictactoe.services.GameService;
 import lombok.RequiredArgsConstructor;

@@ -4,7 +4,7 @@ import com.game.tictactoe.game.GameSession;
 import com.game.tictactoe.game.util.http.PlayersHttpEntity;
 import com.game.tictactoe.game.util.http.StateHttpEntity;
 import com.game.tictactoe.game.modes.TicTacToeGames;
-import com.game.tictactoe.game.util.GameException;
+import com.game.tictactoe.game.util.exceptions.GameException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

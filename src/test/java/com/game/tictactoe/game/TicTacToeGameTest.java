@@ -1,7 +1,7 @@
 package com.game.tictactoe.game;
 
 import com.game.tictactoe.game.modes.TicTacToeGames;
-import com.game.tictactoe.game.util.GameException;
+import com.game.tictactoe.game.util.exceptions.GameException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

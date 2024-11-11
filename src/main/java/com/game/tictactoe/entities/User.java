@@ -27,6 +27,6 @@ public class User {
     @Size(min = 6, message = "Password should be between 6 and 20 letters")
     private String password;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles = new ArrayList<>();
 }

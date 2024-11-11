@@ -1,5 +1,7 @@
-package com.game.tictactoe.game.util;
+package com.game.tictactoe.game.util.advice;
 
+import com.game.tictactoe.game.util.exceptions.GameException;
+import com.game.tictactoe.game.util.http.ExceptionMessageResponseHttpEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,8 +13,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GameAdvice {
 
     @ExceptionHandler(GameException.class)
-    public ResponseEntity<ExceptionMessageResponse> gameException(GameException ex) {
-        ExceptionMessageResponse response = new ExceptionMessageResponse(ex.getMessage());
+    public ResponseEntity<ExceptionMessageResponseHttpEntity> gameException(GameException ex) {
+        ExceptionMessageResponseHttpEntity response = new ExceptionMessageResponseHttpEntity(ex.getMessage());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 }
