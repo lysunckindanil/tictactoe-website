@@ -12,7 +12,7 @@ class ThreeDimensionCheckerTest {
 
     @BeforeAll
     static void setUp() {
-        checker = TicTacToeGames.resolve(3).getTicTacToeGameWinnerChecker();
+        checker = TicTacToeGames.getGameByDimension(3).getTicTacToeGameWinnerChecker();
     }
 
     @Test

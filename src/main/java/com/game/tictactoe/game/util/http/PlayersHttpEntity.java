@@ -1,4 +1,4 @@
-package com.game.tictactoe.game.http;
+package com.game.tictactoe.game.util.http;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

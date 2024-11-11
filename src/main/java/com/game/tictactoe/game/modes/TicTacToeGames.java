@@ -15,7 +15,7 @@ public class TicTacToeGames {
         return new TicTacToeGame(dimension, (positions, player) -> false);
     }
 
-    public static TicTacToeGame resolve(int dimension) {
+    public static TicTacToeGame getGameByDimension(int dimension) {
         if (dimension == 3) {
             return getThreeDimensionTicTacToeGame();
         }

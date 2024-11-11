@@ -18,7 +18,7 @@ class TicTacToeGameTest {
     void setUp() {
         Random rand = new Random();
         dimension = rand.nextInt(3, 100);
-        game = TicTacToeGames.resolve(dimension);
+        game = TicTacToeGames.getGameByDimension(dimension);
     }
 
     // we test cells as though array starts from 1 and ends dimension*dimension
@@ -67,7 +67,7 @@ class TicTacToeGameTest {
 
     @Test
     void firstMethodIfGameEnded() throws GameException {
-        TicTacToeGame game = TicTacToeGames.resolve(3);
+        TicTacToeGame game = TicTacToeGames.getGameByDimension(3);
         makeSecondWin(game);
         assertThrows(GameException.class, () -> game.first(3));
     }
@@ -121,7 +121,7 @@ class TicTacToeGameTest {
 
     @Test
     void secondMethodIfGameEnded() throws GameException {
-        TicTacToeGame game = TicTacToeGames.resolve(3);
+        TicTacToeGame game = TicTacToeGames.getGameByDimension(3);
         makeFirstWin(game);
         assertThrows(GameException.class, () -> game.second(9));
     }
@@ -142,14 +142,14 @@ class TicTacToeGameTest {
 
     @Test
     void isOverMethodIfFirstWins() throws GameException {
-        TicTacToeGame game = TicTacToeGames.resolve(3);
+        TicTacToeGame game = TicTacToeGames.getGameByDimension(3);
         makeFirstWin(game);
         assertTrue(game.isOver());
     }
 
     @Test
     void isOverMethodIfSecondWins() throws GameException {
-        TicTacToeGame game = TicTacToeGames.resolve(3);
+        TicTacToeGame game = TicTacToeGames.getGameByDimension(3);
         makeSecondWin(game);
         assertTrue(game.isOver());
     }
@@ -157,14 +157,14 @@ class TicTacToeGameTest {
     // getWinner
     @Test
     void getWinnerIfFirstWins() throws GameException {
-        TicTacToeGame game = TicTacToeGames.resolve(3);
+        TicTacToeGame game = TicTacToeGames.getGameByDimension(3);
         makeFirstWin(game);
         assertEquals(1, game.getWinner());
     }
 
     @Test
     void getWinnerIfSecondWins() throws GameException {
-        TicTacToeGame game = TicTacToeGames.resolve(3);
+        TicTacToeGame game = TicTacToeGames.getGameByDimension(3);
         makeSecondWin(game);
         assertEquals(2, game.getWinner());
     }
