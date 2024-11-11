@@ -67,7 +67,7 @@
     </div>
 </div>
 
-<!--offcanvas login-->
+<!--offcanvas profile-->
 
 <div class="offcanvas offcanvas-end" tabindex="-1" id="profile-sidebar" aria-labelledby="sidebar-label">
     <div class="offcanvas-header">
@@ -88,9 +88,14 @@
             <div class="col">
                 <label for="formFile" class="form-label">Load new profile pic</label>
                 <input class="form-control" type="file" id="formFile" name="file" required>
-                <button type="submit" class="btn btn-primary mt-2">Save new pic</button>
+                <button type="submit" class="btn btn-primary mt-1">Save new pic</button>
             </div>
-
+        </form>
+        <hr>
+        <form id="logout_form" th:method="post" th:action="@{/users/logout}">
+            <h5 class="text-center text-danger" style="cursor: pointer"
+                onclick="document.getElementById('logout_form').submit()"
+            >Logout</h5>
         </form>
     </div>
 

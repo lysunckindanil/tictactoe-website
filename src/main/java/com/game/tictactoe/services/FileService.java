@@ -17,19 +17,6 @@ public class FileService {
     @Value("${file.upload-dir}")
     private String dir;
 
-    //    public void saveUserFile(MultipartFile file, String username) {
-//        Path saveTo = Paths.get(dir, username);
-//        try {
-//            if (!Files.exists(saveTo))
-//                Files.createDirectories(saveTo);
-//            Path targetLocation = saveTo.resolve(file.getOriginalFilename());
-//
-//            Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//    }
     public void saveUserFile(MultipartFile file, String username) {
         Path saveTo = Paths.get(dir, "profile_photos");
         try {
