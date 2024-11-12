@@ -4,8 +4,6 @@ import com.game.tictactoe.game.util.exceptions.GameException;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Arrays;
-
 @Slf4j
 public class TicTacToeGame {
     private boolean first_turn = true;

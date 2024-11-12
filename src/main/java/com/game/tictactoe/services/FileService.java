@@ -1,6 +1,5 @@
 package com.game.tictactoe.services;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,7 +10,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-@RequiredArgsConstructor
 @Service
 public class FileService {
     @Value("${file.upload-dir}")

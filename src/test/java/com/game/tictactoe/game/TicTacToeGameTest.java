@@ -180,7 +180,7 @@ class TicTacToeGameTest {
     }
 
     @Test
-    void getFirstTurnVariableBeforeFirstTurn() throws GameException, NoSuchFieldException, IllegalAccessException {
+    void getFirstTurnVariableBeforeFirstTurn() throws NoSuchFieldException, IllegalAccessException {
         Field field = game.getClass().getDeclaredField("first_turn");
         field.setAccessible(true);
         boolean first_turn = (boolean) field.get(game);
