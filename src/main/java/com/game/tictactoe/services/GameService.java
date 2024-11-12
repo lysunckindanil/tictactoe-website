@@ -1,10 +1,10 @@
 package com.game.tictactoe.services;
 
 import com.game.tictactoe.game.GameSession;
-import com.game.tictactoe.game.util.http.PlayersHttpEntity;
-import com.game.tictactoe.game.util.http.StateHttpEntity;
 import com.game.tictactoe.game.modes.TicTacToeGames;
 import com.game.tictactoe.game.util.exceptions.GameException;
+import com.game.tictactoe.game.util.http.PlayersHttpEntity;
+import com.game.tictactoe.game.util.http.StateHttpEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -42,13 +42,15 @@ public class GameService {
 
     }
 
-    public void close(Integer target) throws GameException {
-        if (game_sessions.containsKey(target)) {
-            player_target.remove(game_sessions.get(target).getPlayer1());
-            player_target.remove(game_sessions.get(target).getPlayer2());
-            game_sessions.remove(target);
+    public void close(String username) throws GameException {
+        if (player_target.containsKey(username)) {
+            int target = player_target.get(username);
+            player_target.remove(username);
+            if (!player_target.containsValue(target)) {
+                game_sessions.remove(target);
+            }
         } else {
-            throw new GameException("Session with this id doesn't exist");
+            throw new GameException("You cannot close this session or it doesn't exist");
         }
     }
 

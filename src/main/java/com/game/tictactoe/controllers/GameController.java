@@ -40,7 +40,7 @@ public class GameController {
     @PostMapping("/close")
     @ResponseBody
     public void closeSession(Principal principal) throws GameException {
-        gameService.close(gameService.getTargetByUsername(principal.getName()));
+        gameService.close(principal.getName());
     }
 
     @GetMapping("/session")

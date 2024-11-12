@@ -22,7 +22,6 @@ public class TicTacToeGame {
         this.ticTacToeGameWinnerChecker = ticTacToeGameWinnerChecker;
         this.dimension = dimension;
         cells = new int[dimension * dimension];
-        Arrays.fill(cells, 0);
     }
 
     // cells array actually starts from zero, but we pass

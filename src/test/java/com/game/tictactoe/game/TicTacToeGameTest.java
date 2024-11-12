@@ -5,6 +5,8 @@ import com.game.tictactoe.game.util.exceptions.GameException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,6 +21,14 @@ class TicTacToeGameTest {
         Random rand = new Random();
         dimension = rand.nextInt(3, 100);
         game = TicTacToeGames.getGameByDimension(dimension);
+    }
+
+    @Test
+    void cellsArrayAfterCreation() {
+        int[] array = new int[dimension * dimension];
+        Arrays.fill(array, 0);
+        assertEquals(dimension * dimension, game.getCells().length);
+        assertArrayEquals(array, game.getCells());
     }
 
     // we test cells as though array starts from 1 and ends dimension*dimension
@@ -167,6 +177,45 @@ class TicTacToeGameTest {
         TicTacToeGame game = TicTacToeGames.getGameByDimension(3);
         makeSecondWin(game);
         assertEquals(2, game.getWinner());
+    }
+
+    @Test
+    void getFirstTurnVariableBeforeFirstTurn() throws GameException, NoSuchFieldException, IllegalAccessException {
+        Field field = game.getClass().getDeclaredField("first_turn");
+        field.setAccessible(true);
+        boolean first_turn = (boolean) field.get(game);
+        assertTrue(first_turn);
+    }
+
+    @Test
+    void getFirstTurnVariableAfterFirstTurn() throws GameException, NoSuchFieldException, IllegalAccessException {
+        game.first(1);
+        Field field = game.getClass().getDeclaredField("first_turn");
+        field.setAccessible(true);
+        boolean first_turn = (boolean) field.get(game);
+        assertFalse(first_turn);
+    }
+
+    @Test
+    void getFirstTurnVariableAfterFirstAndSecondTurn() throws GameException, NoSuchFieldException, IllegalAccessException {
+        game.first(1);
+        game.second(2);
+        Field field = game.getClass().getDeclaredField("first_turn");
+        field.setAccessible(true);
+        boolean first_turn = (boolean) field.get(game);
+        assertTrue(first_turn);
+    }
+
+
+    @Test
+    void getFirstTurnVariableAfterFirstAndSecondAndFirstTurn() throws GameException, NoSuchFieldException, IllegalAccessException {
+        game.first(1);
+        game.second(2);
+        game.first(3);
+        Field field = game.getClass().getDeclaredField("first_turn");
+        field.setAccessible(true);
+        boolean first_turn = (boolean) field.get(game);
+        assertFalse(first_turn);
     }
 
 
