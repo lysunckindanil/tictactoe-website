@@ -5,6 +5,7 @@ import com.game.tictactoe.game.modes.TicTacToeGames;
 import com.game.tictactoe.game.util.exceptions.GameException;
 import com.game.tictactoe.game.util.http.PlayersHttpEntity;
 import com.game.tictactoe.game.util.http.StateHttpEntity;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,9 @@ import java.util.Objects;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class GameService {
+    private final FileService fileService;
     private final Map<Integer, GameSession> game_sessions = new HashMap<>();
     private final Map<String, Integer> player_target = new HashMap<>();
 
@@ -24,6 +27,8 @@ public class GameService {
     }
 
     public Integer createSession(String username, int dimension) throws GameException {
+        if (fileService.userPhotoNotExists(username))
+            throw new GameException("You should upload photo before creating a session");
         Integer target = getTarget(username);
         if (game_sessions.containsKey(target))
             throw new GameException("You should close last game before creating new one");
@@ -33,6 +38,8 @@ public class GameService {
     }
 
     public void connect(Integer target, String username) throws GameException {
+        if (fileService.userPhotoNotExists(username))
+            throw new GameException("You should upload photo before connection to a session");
         if (game_sessions.containsKey(target)) {
             game_sessions.get(target).connect(username);
             player_target.put(username, target);

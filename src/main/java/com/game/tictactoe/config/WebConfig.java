@@ -10,13 +10,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebMvc
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
-    @Value("${file.upload-dir}")
-    private String dir;
+    @Value("${file.static-dir}")
+    private String static_dir;
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**")
-                .addResourceLocations("file:" + dir, "classpath:/static/")
+                .addResourceLocations("file:" + static_dir, "classpath:/static/")
                 .setCacheControl(CacheControl.noCache());
     }
 }

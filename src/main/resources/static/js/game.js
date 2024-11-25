@@ -12,6 +12,9 @@ function createSession() {
         success: function (data) {
             renderSessionPage(data['target']);
             startReloadPositionsLoop(1000);
+        },
+        error: function (data) {
+            showErrorModal(data)
         }
     });
 }
@@ -138,7 +141,6 @@ function renderPositions(positions, players) {
         if (positions[i] !== 0) {
             const cell = document.getElementById(String(i + 1));
             if (positions[i] === 1) cell.style.backgroundImage = `url(/profile_photos/${players[0]}.png)`;
-
             else {
                 cell.style.backgroundImage = `url(/profile_photos/${players[1]}.png)`;
             }
